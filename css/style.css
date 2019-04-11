@@ -1,0 +1,106 @@
+	body {
+	font-family: sans-serif;
+	background-color: #D4EDF7;
+	margin: 0;
+	padding: 0;
+	}
+
+ #bar {
+	 width: 200px;
+	 float: left;
+	 background-color: #347B98;
+		border-radius: 15px;
+	 text-align: center;
+	 margin-top: 15px;
+	 margin-left: 15px;
+	 height: 150px;
+	 z-index: 10;
+	 position: absolute;
+ }
+
+	#map {
+	 z-index: 1;
+	 position: absolute;
+	}
+
+	#controls {
+		height: 90px;
+		background-color: #347B98;
+    border-radius: 15px;
+		text-align: center;
+		padding-top: 15px;
+	}
+
+h1 {
+	font-family: 'Alfa Slab One';
+	letter-spacing: 2px;
+	margin-bottom: 5px;
+  color: #341809;
+	font-weight: 100;
+	margin-top: 0;
+}
+
+h2 {
+	font-family: 'Alfa Slab One';
+	margin-top: 5px;
+	color: #B84E14;
+	font-weight: 100;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 0;
+	line-height: 25px;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.zoomButtons {
+	list-style-type: none;
+	background-color: white;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.buttons {
+	margin: 0;
+	line-height: normal;
+}
+
+.buttons > li {
+	border: 1px solid gray;
+	padding: 4px;
+}
+
+.buttons > li:hover {
+	background-color: grey;
+}
+
+.buttons > .home {
+	border-top: 0px;
+	border-bottom: 0;
+}
+
+.leaflet-right .leaflet-control {
+	float: none;
+	display: inline-block;
+}
+
+.crimeTitle {
+	color: white;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	font-size: 130%;
+}
+
+.info {
+	color: white;
+	margin-bottom: 10px;
+}
+
+.info:hover {
+	text-decoration: underline;;
+}
