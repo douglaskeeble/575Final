@@ -73,7 +73,13 @@
 			narcotics.eachLayer(function(layer) {
 				heat.push(layer._latlng);
 			});
-			var heatmap = L.heatLayer(heat).addTo(map);
+			var heatmap = L.heatLayer(heat, {
+				gradient: {
+					0.4: '#3490DC',
+					0.65: '#FFED4A',
+					1: '#F66D9B'
+				}
+			}).addTo(map);
 		}
 
 		function zoomButtons() {
