@@ -1,36 +1,5 @@
 	$(document).ready(function() {
 
-		$('#map').css('height', $(window).height());
-		$('#map').css('width', $(window).width());
-		$(window).on('resize', function() {
-			$('#map').css('height', $(window).height());
-			$('#map').css('width', $(window).width());
-		});
-
-		$("#narcDialog").dialog({
-			autoOpen: false
-		});
-		$("#burgDialog").dialog({
-			autoOpen: false
-		});
-		$("#homDialog").dialog({
-			autoOpen: false
-		});
-
-		$('.narcInfo').click(function() {
-			$('#narcDialog').dialog('open');
-		})
-		$('.burgInfo').click(function() {
-			$('#burgDialog').dialog('open');
-		})
-		$('.homInfo').click(function() {
-			$('#homDialog').dialog('open');
-		})
-		proj4.defs("EPSG:2229",
-			"+proj=lcc +lat_1=35.46666666666667 +lat_2=34.03333333333333 +lat_0=33.5 +lon_0=-118 +x_0=2000000.0001016 +y_0=500000.0001016001 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs"
-		);
-
-		var narcotics;
 		var coords = [34.0522, -118.2437, 10];
 		var map = L.map('map', {
 			center: [coords[0], coords[1]],
@@ -46,41 +15,71 @@
 				maxZoom: 19
 			}).addTo(map);
 
-		var heat = [];
+		var heatAll = [];
+		var heatNarc = [];
+		var heatBurg = [];
+		var heatHom = [];
+		var heatmapAll;
+		var heatmapBurg;
+		var heatmapHom;
+		var heatmapNarc;
+
+		zoomButtons();
 
 
-		$.getJSON('data/narc.json')
-			.done(function(data) {
-				create(data);
-				zoomButtons();
-			})
-			.fail(function() {
-				alert('There has been a problem loading the data.')
+		d3.csv("/data/allCrimes.csv").then(function(data) {
+			data.forEach(function(d) {
+				heatAll.push([d.Y, d.X]);
 			});
-
-		function create(data) {
-			narcotics = L.Proj.geoJson(data, {
-				pointToLayer: function(feature, latlng) {
-					//			console.log(feature);
-					return L.circleMarker(latlng, {
-						fillColor: '#B84E14',
-						color: '#341809',
-						weight: 1,
-						fillOpacity: 0.6
-					});
-				}
-			})
-			narcotics.eachLayer(function(layer) {
-				heat.push(layer._latlng);
-			});
-			var heatmap = L.heatLayer(heat, {
+			heatmapAll = L.heatLayer(heatAll, {
 				gradient: {
 					0.4: '#3490DC',
 					0.65: '#FFED4A',
 					1: '#F66D9B'
 				}
 			}).addTo(map);
-		}
+		});
+
+		d3.csv("/data/burgalryOnly.csv").then(function(data) {
+			data.forEach(function(d) {
+				heatBurg.push([d.Y, d.X]);
+			});
+			heatmapBurg = L.heatLayer(heatBurg, {
+				gradient: {
+					0.4: '#3490DC',
+					0.65: '#FFED4A',
+					1: '#F66D9B'
+				}
+			});
+		});
+
+		d3.csv("/data/homicideOnly.csv").then(function(data) {
+			data.forEach(function(d) {
+				heatHom.push([d.Y, d.X]);
+			});
+			heatmapHom = L.heatLayer(heatHom, {
+				gradient: {
+					0.4: '#3490DC',
+					0.65: '#FFED4A',
+					1: '#F66D9B'
+				}
+			});
+		});
+
+		d3.csv("/data/narcOnly.csv").then(function(data) {
+			data.forEach(function(d) {
+				heatNarc.push([d.Y, d.X]);
+			});
+			heatmapNarc = L.heatLayer(heatNarc, {
+				gradient: {
+					0.4: '#3490DC',
+					0.65: '#FFED4A',
+					1: '#F66D9B'
+				}
+			});
+		});
+
+		jqueryInit();
 
 		function zoomButtons() {
 			var zoom = L.control({
@@ -106,6 +105,108 @@
 			});
 			$(".zoomOut").click(function() {
 				map.zoomOut();
+			});
+		}
+
+		function jqueryInit() {
+			$("#narcDialog").dialog({
+				autoOpen: false
+			});
+			$("#burgDialog").dialog({
+				autoOpen: false
+			});
+			$("#homDialog").dialog({
+				autoOpen: false
+			});
+
+			$('.narcInfo').click(function() {
+				$('#narcDialog').dialog('open');
+			})
+			$('.burgInfo').click(function() {
+				$('#burgDialog').dialog('open');
+			})
+			$('.homInfo').click(function() {
+				$('#homDialog').dialog('open');
+			})
+
+			$('.narc16').click(function() {
+				if ($(this).hasClass('activeYear')) {
+					$(this).toggleClass('activeYear');
+					map.removeLayer(heatmapNarc);
+					map.addLayer(heatmapAll);
+					$('.all16').toggleClass('activeYear');
+				} else {
+					$(this).toggleClass('activeYear');
+					map.eachLayer(function(layer) {
+						if (!(layer._url ==
+								'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png')) {
+							map.removeLayer(layer);
+						}
+					});
+					heatmapNarc.addTo(map);
+					$('.hom16').removeClass('activeYear');
+					$('.burg16').removeClass('activeYear');
+					$('.all16').removeClass('activeYear');
+				}
+			});
+			$('.hom16').click(function() {
+				if ($(this).hasClass('activeYear')) {
+					$(this).toggleClass('activeYear');
+					map.removeLayer(heatmapHom);
+					map.addLayer(heatmapAll);
+					$('.all16').toggleClass('activeYear');
+				} else {
+					$(this).toggleClass('activeYear');
+					map.eachLayer(function(layer) {
+						if (!(layer._url ==
+								'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png')) {
+							map.removeLayer(layer);
+						}
+					});
+					heatmapHom.addTo(map);
+					$('.narc16').removeClass('activeYear');
+					$('.burg16').removeClass('activeYear');
+					$('.all16').removeClass('activeYear');
+				}
+			});
+			$('.burg16').click(function() {
+				if ($(this).hasClass('activeYear')) {
+					$(this).toggleClass('activeYear');
+					map.removeLayer(heatmapBurg);
+					map.addLayer(heatmapAll);
+					$('.all16').toggleClass('activeYear');
+				} else {
+					$(this).toggleClass('activeYear');
+					map.eachLayer(function(layer) {
+						if (!(layer._url ==
+								'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+							)) {
+							map.removeLayer(layer);
+						}
+					});
+					heatmapBurg.addTo(map);
+					$('.hom16').removeClass('activeYear');
+					$('.narc16').removeClass('activeYear');
+					$('.all16').removeClass('activeYear');
+				}
+			});
+			$('.all16').click(function() {
+				if ($(this).hasClass('activeYear')) {
+					$(this).toggleClass('activeYear');
+					map.removeLayer(heatmapAll);
+				} else {
+					$(this).toggleClass('activeYear');
+					map.eachLayer(function(layer) {
+						if (!(layer._url ==
+								'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png')) {
+							map.removeLayer(layer);
+						}
+					});
+					heatmapAll.addTo(map);
+					$('.hom16').removeClass('activeYear');
+					$('.burg16').removeClass('activeYear');
+					$('.narc16').removeClass('activeYear');
+				}
 			});
 		}
 

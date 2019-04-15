@@ -1,3 +1,8 @@
+html, body, #map {
+	height: 100%;
+	width: 100%;
+}
+
 	body {
 	font-family: sans-serif;
 	background-color: #D4EDF7;
@@ -6,14 +11,14 @@
 	}
 
  #bar {
-	 width: 200px;
+	 width: 250px;
 	 float: left;
 	 background-color: #347B98;
-		border-radius: 15px;
+	 border-radius: 15px;
 	 text-align: center;
 	 margin-top: 15px;
 	 margin-left: 15px;
-	 height: 150px;
+	 height: 260px;
 	 z-index: 10;
 	 position: absolute;
  }
@@ -98,9 +103,25 @@ h3 {
 
 .info {
 	color: white;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .info:hover {
 	text-decoration: underline;;
+}
+
+.hom16, .burg16, .narc16, .all16 {
+	color: #B8C2CC;
+	margin-left: 10px;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+.hom05, .burg05, .narc05, .all05 {
+	color: #B8C2CC;
+	display: inline-block;
+}
+
+.activeYear {
+	color: #F6993F;
 }
