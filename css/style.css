@@ -114,14 +114,24 @@ h3 {
 	color: #B8C2CC;
 	margin-left: 10px;
 	margin-bottom: 5px;
+	cursor: pointer;
 	display: inline-block;
+}
+
+.hom16:hover, .burg16:hover, .narc16:hover, .all16:hover {
+	color: #8795A1;
 }
 
 .hom05, .burg05, .narc05, .all05 {
 	color: #B8C2CC;
 	display: inline-block;
+	cursor: pointer;
+}
+
+.hom16:hover, .burg16:hover, .narc16:hover, .all16:hover {
+	color: #8795A1;
 }
 
 .activeYear {
-	color: #F6993F;
+	color: #F6993F !important;
 }
