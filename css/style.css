@@ -18,7 +18,7 @@ html, body, #map {
 	 text-align: center;
 	 margin-top: 15px;
 	 margin-left: 15px;
-	 height: 260px;
+	 height: 300px;
 	 z-index: 10;
 	 position: absolute;
  }
@@ -95,10 +95,15 @@ h3 {
 }
 
 .crimeTitle {
-	color: white;
+	color: #FAAD63;
+	font-weight: bold;
 	margin-bottom: 20px;
 	margin-top: 20px;
 	font-size: 130%;
+}
+
+.bolder {
+	font-size: 160%;
 }
 
 .info {
