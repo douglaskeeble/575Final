@@ -27,7 +27,7 @@
 		zoomButtons();
 
 
-		d3.csv("/data/allCrimes.csv").then(function(data) {
+		d3.csv("data/allCrimes.csv").then(function(data) {
 			data.forEach(function(d) {
 				heatAll.push([d.Y, d.X]);
 			});
@@ -40,7 +40,7 @@
 			}).addTo(map);
 		});
 
-		d3.csv("/data/burgalryOnly.csv").then(function(data) {
+		d3.csv("data/burgalryOnly.csv").then(function(data) {
 			data.forEach(function(d) {
 				heatBurg.push([d.Y, d.X]);
 			});
@@ -53,7 +53,7 @@
 			});
 		});
 
-		d3.csv("/data/homicideOnly.csv").then(function(data) {
+		d3.csv("data/homicideOnly.csv").then(function(data) {
 			data.forEach(function(d) {
 				heatHom.push([d.Y, d.X]);
 			});
@@ -66,7 +66,7 @@
 			});
 		});
 
-		d3.csv("/data/narcOnly.csv").then(function(data) {
+		d3.csv("data/narcOnly.csv").then(function(data) {
 			data.forEach(function(d) {
 				heatNarc.push([d.Y, d.X]);
 			});
