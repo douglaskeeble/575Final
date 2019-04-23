@@ -18,9 +18,26 @@ html, body, #map {
 	 text-align: center;
 	 margin-top: 15px;
 	 margin-left: 15px;
-	 height: 300px;
+	 height: 350px;
 	 z-index: 10;
 	 position: absolute;
+ }
+
+ #infoBar {
+	width: 250px;
+	float: left;
+	background-color: #347B98;
+	border-radius: 15px;
+	text-align: center;
+	margin-top: 375px;
+	margin-left: 15px;
+	height: 20px;
+	padding-top: 8px;
+	padding-bottom: 5px;
+	color: white;
+	font-size: 90%;
+	z-index: 10;
+	position: absolute;
  }
 
 	#map {
@@ -115,7 +132,7 @@ h3 {
 	text-decoration: underline;;
 }
 
-.hom16, .burg16, .narc16, .all16 {
+.hom16, .burg16, .narc16, .all16, .dem16 {
 	color: #B8C2CC;
 	margin-left: 10px;
 	margin-bottom: 5px;
@@ -123,20 +140,36 @@ h3 {
 	display: inline-block;
 }
 
-.hom16:hover, .burg16:hover, .narc16:hover, .all16:hover {
+.hom16:hover, .burg16:hover, .narc16:hover, .all16:hover, .dem16:hover {
 	color: #8795A1;
 }
 
-.hom05, .burg05, .narc05, .all05 {
+.hom05, .burg05, .narc05, .all05, .dem05 {
 	color: #B8C2CC;
 	display: inline-block;
 	cursor: pointer;
 }
 
-.hom16:hover, .burg16:hover, .narc16:hover, .all16:hover {
+.hom05:hover, .burg05:hover, .narc05:hover, .all05:hover, .dem05:hover {
 	color: #8795A1;
 }
 
 .activeYear {
 	color: #F6993F !important;
+}
+
+.leaflet-overlay-pane svg path{
+    pointer-events: auto;
+}
+
+.no-show {
+	display: none;
+}
+
+.dem16Layer {
+	z-index: 1;
+}
+
+.leaflet-map-pane canvas {
+	z-index: 9999;
 }
