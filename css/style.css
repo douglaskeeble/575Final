@@ -124,19 +124,11 @@ h3 {
 }
 
 .info {
-	color: white;
+	color: #22292F;
 	margin-bottom: 5px;
 }
 
-<<<<<<< HEAD
-.hom16, .burg16, .narc16, .all16 {
-=======
-.info:hover {
-	text-decoration: underline;;
-}
-
 .hom16, .burg16, .narc16, .all16, .dem16 {
->>>>>>> 7d4b617ebfa192989d6d273020207a3726514555
 	color: #B8C2CC;
 	margin-left: 10px;
 	margin-bottom: 5px;
@@ -162,25 +154,40 @@ h3 {
 	color: #F6993F !important;
 }
 
-<<<<<<< HEAD
 .narcInfo{
 	display: inline;
-    margin-left: 50px;
+    margin-right: 10px;
+		color: white;
+		margin-bottom: 5px;
+		font-size: 80%;
 }
 
 .burgInfo{
 	display: inline;
-    margin-left: 50px;
+    margin-right: 10px;
+		color: white;
+		margin-bottom: 5px;
+		font-size: 80%;
 }
 
 .homInfo{
 	display: inline;
-    margin-left: 50px;
+    margin-right: 10px;
+		color: white;
+		margin-bottom: 5px;
+		font-size: 80%;
 }
 
 .narcInfo:hover, .burgInfo:hover, .homInfo:hover {
 		text-decoration: underline;
-=======
+}
+
+.demSelect{
+	background-color: #347B98;
+    border: 0;
+    color: white;
+}
+
 .leaflet-overlay-pane svg path{
     pointer-events: auto;
 }
@@ -195,5 +202,4 @@ h3 {
 
 .leaflet-map-pane canvas {
 	z-index: 9999;
->>>>>>> 7d4b617ebfa192989d6d273020207a3726514555
 }
