@@ -25,7 +25,9 @@
     <div class="burgInfo info">Burglary Information</div> <div class='burg05'>2005</div>  <div class='burg16'>2016</div>
     <div class="homInfo info">Homicide Information</div>  <div class='hom05'>2005</div>  <div class='hom16'>2016</div>
     <div class='info'>All Crimes</div> <div class='all05'>2005</div>  <div class='all16 activeYear'>2016</div>
+    <div class='dem info'><select id="demSelect"><option selected disabled>Demographic</option></select></div> <div class='dem05'>2005</div>  <div class='dem16 activeYear'>2016</div>
   </div>
+  <div id='infoBar' class='no-show'></div>
 		<div id="map"></div>
 
     <div id="narcDialog" title="Narcotics Information">
@@ -40,12 +42,24 @@
   <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
 </div>
 
-
 		<!--scripts-->
 		<script src="js/jquery.js"></script>
-    <script src="js/d3.js"></script>
-    <script src="js/touchpunch.js"></script>
     <script src="js/jquery-ui.min.js"></script>
+    <script>
+    $("#narcDialog").dialog({
+    	autoOpen: false
+    });
+    $("#burgDialog").dialog({
+    	autoOpen: false
+    });
+    $("#homDialog").dialog({
+    	autoOpen: false
+    });
+    </script>
+    <script src="js/d3.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/topo.js"></script>
+    <script src="js/touchpunch.js"></script>
 		<script src="js/leaflet.js"></script>
     <script src="js/heat.js"></script>
 		<script src="js/main.js"></script>
