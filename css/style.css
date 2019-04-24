@@ -98,7 +98,7 @@ h3 {
 }
 
 .buttons > li:hover {
-	background-color: grey;
+	background-color: #F1F5F8;
 }
 
 .buttons > .home {
@@ -124,7 +124,7 @@ h3 {
 }
 
 .info {
-	color: #22292F;
+	color: white;
 	margin-bottom: 5px;
 }
 
@@ -154,32 +154,14 @@ h3 {
 	color: #F6993F !important;
 }
 
-.narcInfo{
-	display: inline;
-    margin-right: 10px;
-		color: white;
-		margin-bottom: 5px;
-		font-size: 80%;
-}
-
-.burgInfo{
-	display: inline;
-    margin-right: 10px;
-		color: white;
-		margin-bottom: 5px;
-		font-size: 80%;
-}
-
-.homInfo{
-	display: inline;
-    margin-right: 10px;
-		color: white;
-		margin-bottom: 5px;
-		font-size: 80%;
+.narcInfo, .burgInfo, .homInfo{
+	margin-left: 10px;
+	top: 1px;
+	position: relative;
 }
 
 .narcInfo:hover, .burgInfo:hover, .homInfo:hover {
-		text-decoration: underline;
+		color: #4DC0B5;
 }
 
 .demSelect{
@@ -198,6 +180,7 @@ h3 {
 
 .dem16Layer {
 	z-index: 1;
+	opacity: .6;
 }
 
 .leaflet-map-pane canvas {
