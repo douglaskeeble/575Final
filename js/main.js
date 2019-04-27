@@ -96,10 +96,10 @@ $(document).ready(function() {
 					// 0.4: '#a6611a',
 					// 0.65: '#f5f5f5',
 					// 1: '#80cdc1'
-					0.4: '#810f7c',
-					0.65: '#8c96c6',
+					0.4: '#54278f',
+					0.65: '#756bb1',
 					0.8: '#edf8fb',
-					0.9: '#b3cde3'
+					0.9: '#cbc9e2'
 				}
 			});
 			element.heatmap.setLatLngs(element.heat);
