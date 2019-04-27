@@ -18,7 +18,7 @@ html, body, #map {
 	 text-align: center;
 	 margin-top: 15px;
 	 margin-left: 15px;
-	 height: 350px;
+	 height: 300px;
 	 z-index: 10;
 	 position: absolute;
  }
@@ -29,7 +29,7 @@ html, body, #map {
 	background-color: #347B98;
 	border-radius: 15px;
 	text-align: center;
-	margin-top: 375px;
+	margin-top: 325px;
 	margin-left: 15px;
 	height: 20px;
 	padding-top: 8px;
@@ -129,39 +129,31 @@ h3 {
 }
 
 .hom16, .burg16, .narc16, .all16, .dem16 {
-	color: #B8C2CC;
 	margin-left: 10px;
-	margin-bottom: 5px;
+	margin-right: 10px;
+	margin-bottom: 10px;
 	cursor: pointer;
 	display: inline-block;
 }
 
 .hom16:hover, .burg16:hover, .narc16:hover, .all16:hover, .dem16:hover {
-	color: #8795A1;
-}
-
-.hom05, .burg05, .narc05, .all05, .dem05 {
 	color: #B8C2CC;
-	display: inline-block;
-	cursor: pointer;
-}
-
-.hom05:hover, .burg05:hover, .narc05:hover, .all05:hover, .dem05:hover {
-	color: #8795A1;
 }
 
 .activeYear {
 	color: #F6993F !important;
 }
 
-.narcInfo, .burgInfo, .homInfo{
+.allcrimeInfo{
 	margin-left: 10px;
 	top: 1px;
 	position: relative;
+	margin-bottom: 25px;
 }
 
-.narcInfo:hover, .burgInfo:hover, .homInfo:hover {
-		color: #4DC0B5;
+.allcrimeInfo:hover {
+    color: #4DC0B5;
+    cursor: pointer;
 }
 
 .demSelect{
@@ -186,3 +178,86 @@ h3 {
 .leaflet-map-pane canvas {
 	z-index: 9999;
 }
+
+/* modal styling */
+
+#allcrimeDialog {
+    background-color: lightgray;
+}
+
+
+#titleHolder, #menuHolder, #linebuttonHolder {
+    text-align: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+#titleHolder2{
+    margin-top: 100px;
+    text-align: center;
+}
+
+
+/* line graph tool tips */
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.line {
+    fill: none;
+
+    stroke-width: 1.5px;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: black;
+}
+
+.focus text {
+    font-size: 14px;
+}
+
+.tooltip {
+    fill: black;
+    stroke: #000;
+    min-width: 50px;
+    opacity: 0.8;
+}
+
+
+.tooltip-date, .tooltip-name, .tooltip-crime {
+    fill: white;
+}
+
+/* end line graph tool tips */
+
+/*bubblegraph*/
+
+  div.tooltip {
+    position: absolute;
+    text-align: center;
+    min-width: 60px;
+    min-height: 20px;
+    padding: 4px;
+    font-family: 1.2vw 'Avenir' sans-serif;
+    color: white;
+    background: black;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+text {
+    cursor: default;
+    font-family:
+}
+
+/*end bubblegraph*/

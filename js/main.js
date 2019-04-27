@@ -1,14 +1,36 @@
+var allCrimes = ["Alcohol Incidents", "Arson Incidents", "Assaults",
+	"Burglaries", "Fed. Offenses", "Gambling", "Grand Theft Auto",
+	"Homicides", "Mentally Ill", "Misc. Felonies", "Narcotics",
+	"Robberies", "Sex Offenses", "Suicides", "Vagrancy Incidents",
+	"Vandalism", "Vehicle Laws", "Weapon Laws", "Total Crimes"
+];
+
 $(document).ready(function() {
 
-	$('.narcInfo').click(function() {
-		$('#narcDialog').dialog('open');
+	$('.allcrimeInfo').click(function() {
+		if ($('#allcrimeDialog').dialog('isOpen')) {
+			$('#allcrimeDialog').dialog('close');
+		} else {
+			$('#allcrimeDialog').dialog('open');
+		}
 	})
-	$('.burgInfo').click(function() {
-		$('#burgDialog').dialog('open');
+
+	var dropDownChoices = ['Total Population', 'White', 'Black',
+		'American Indian', 'Asian', 'Pacific Islander', 'Other',
+		'Two or More', "Mean Income", 'Less than HS',
+		'High School', 'Some College', "Bachelor's or Higher",
+		"Alcohol Incidents", "Arson Incidents", "Assaults",
+		"Burglaries", "Fed. Offenses", "Misc. Felonies", "Gambling",
+		"Grand Theft Auto", 'Fraud',
+		"Homicides", "Mentally Ill", "Narcotics",
+		"Robberies", "Sex Offenses", "Suicides", "Vagrancy Incidents",
+		"Vandalism", "Vehicle Laws", "Weapon Laws", "Total Crimes"
+	]
+
+	allCrimes.forEach(function(val) {
+		dropDownChoices.push(val);
 	})
-	$('.homInfo').click(function() {
-		$('#homDialog').dialog('open');
-	})
+
 
 	var coords = [34.0522, -118.2437, 10];
 	var map = L.map('map', {
@@ -34,23 +56,13 @@ $(document).ready(function() {
 	var heatNarc16 = [];
 	var heatBurg16 = [];
 	var heatHom16 = [];
-	var heatAll05 = [];
-	var heatNarc05 = [];
-	var heatBurg05 = [];
-	var heatHom05 = [];
 	var props = [];
 	var heatmapAll16 = L.heatLayer(),
 		heatmapBurg16 = L.heatLayer(),
 		heatmapHom16 = L.heatLayer(),
-		heatmapNarc16 = L.heatLayer(),
-		heatmapAll05 = L.heatLayer(),
-		heatmapBurg05 = L.heatLayer(),
-		heatmapHom05 = L.heatLayer(),
-		heatmapNarc05 = L.heatLayer();
+		heatmapNarc16 = L.heatLayer();
 	var expressed;
-	var classes = ['.hom16', '.burg16', '.all16', '.narc16', '.hom05', '.burg05',
-		'.all05', '.narc05'
-	];
+	var classes = ['.hom16', '.burg16', '.all16', '.narc16'];
 	var layerList = [{
 		file: 'all16.csv',
 		heat: heatAll16,
@@ -71,42 +83,23 @@ $(document).ready(function() {
 		heat: heatHom16,
 		heatmap: heatmapHom16,
 		class: '.hom16'
-	}, {
-		file: 'all05.csv',
-		heat: heatAll05,
-		heatmap: heatmapAll05,
-		class: '.all05'
-	}, {
-		file: 'burg05.csv',
-		heat: heatBurg05,
-		heatmap: heatmapBurg05,
-		class: '.burg05'
-	}, {
-		file: 'narc05.csv',
-		heat: heatNarc05,
-		heatmap: heatmapNarc05,
-		class: '.narc05'
-	}, {
-		file: 'hom05.csv',
-		heat: heatHom05,
-		heatmap: heatmapHom05,
-		class: '.hom05'
 	}]
 
 	layerList.forEach(function(element) {
-		d3.csv("data/" + element.file).then(function(data) {
+		d3.csv("data/" + element.file, function(data) {
 			data.forEach(function(d) {
 				element.heat.push([d.Y, d.X]);
 			});
 			element.heatmap.setOptions({
 				blur: 5,
 				gradient: {
-					// 0.4: '#3490DC',
-					// 0.65: '#FFED4A',
-					// 1: '#F66D9B'
-					0.4: '#a6611a',
-					0.65: '#f5f5f5',
-					1: '#80cdc1'
+					// 0.4: '#a6611a',
+					// 0.65: '#f5f5f5',
+					// 1: '#80cdc1'
+					0.4: '#810f7c',
+					0.65: '#8c96c6',
+					0.8: '#edf8fb',
+					0.9: '#b3cde3'
 				}
 			});
 			element.heatmap.setLatLngs(element.heat);
@@ -124,18 +117,16 @@ $(document).ready(function() {
 
 	function createTopo() {
 		var csv;
-		d3.csv("data/dem16.csv").then(function(data) {
+		d3.csv("data/dem16.csv", function(data) {
 			csv = data;
 		});
 
-		d3.json('data/dem16topo.json').then(function(data) {
+		d3.json('data/dem16topo.json', function(data) {
 			var svg = d3.select("#map").select("svg")
 				.attr("pointer-events", "auto");
 
-			var g = svg.select("g");
-
-			d3.selectAll("g")
-				.classed("dem16Layer", true);
+			var g = svg.select("g")
+				.classed("dem16Layer no-show", true);
 
 			var topo = topojson.feature(data, data.objects.dem16).features;
 
@@ -215,15 +206,20 @@ $(document).ready(function() {
 
 
 		function joinData(dem16, csvData, ) {
-			//join geoid of data and tracts
+
 			for (prop in csvData[0]) {
 				if (!(prop == 'CT10')) {
 					props.push(prop)
 				}
 			}
-			props.forEach(function(val) {
-				$('#demSelect').append('<option value="' + val + '">' + val +
+			props.forEach(function(val, num) {
+				$('#demSelect').append('<option value="' + val + '">' +
+					dropDownChoices[num] +
 					'</option>');
+				if (num == 12) {
+					$('#demSelect').append(
+						'<option value="Crimes" disabled>Crimes</option>');
+				}
 			});
 
 			$('#demSelect').change(function() {
@@ -253,18 +249,11 @@ $(document).ready(function() {
 
 	function makeColorScale(data) {
 		var colorClasses = [
-			// "#d0d1e6",
-			// "#a6bddb",
-			// "#67a9cf",
-			// "#1c9099",
-			// "#016c59",
 			"#ffffcc",
 			"#c2e699",
 			"#78c678",
 			"#31a354",
 			"#006837"
-
-
 		];
 
 		//create color scale generator
@@ -314,7 +303,7 @@ $(document).ready(function() {
 		var colorScale = makeColorScale(csvData);
 
 		//recolor enumeration units
-		var tracts = d3.selectAll("path")
+		var tracts = d3.selectAll("g.dem16Layer path")
 			.transition()
 			.duration(1000)
 			.style("fill", function(d) {
@@ -377,18 +366,11 @@ $(document).ready(function() {
 		})
 
 		$('.dem16').click(function() {
-			d3.selectAll("g")
+			d3.selectAll("g.dem16Layer")
 				.classed("no-show", function(d, i) {
 					return !d3.select(this).classed("no-show");
 				});
-			if ($(this).hasClass('activeYear')) {
-				$(this).toggleClass('activeYear');
-			} else {
-				$(this).toggleClass('activeYear');
-				$('.hom16').removeClass('activeYear');
-				$('.burg16').removeClass('activeYear');
-				$('.narc16').removeClass('activeYear');
-			}
+			$(this).toggleClass('activeYear');
 		});
 	}
 

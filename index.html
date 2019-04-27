@@ -20,48 +20,61 @@
 <body>
 
     <div id="bar">
-    <div class="crimeTitle"><span class="bolder">Los Angeles</span><br>Crime Spotter</div>
-    <div class="info">Narcotics<i class="fas fa-info-circle narcInfo"></i></div> <div class='narc05'>2005</div> <div class='narc16'>2016</div>
-    <div class="info">Burglary<i class="fas fa-info-circle burgInfo"></i></div> <div class='burg05'>2005</div>  <div class='burg16'>2016</div>
-    <div class="info">Homicide<i class="fas fa-info-circle homInfo"></i></div>  <div class='hom05'>2005</div>  <div class='hom16'>2016</div>
-    <div class='info'>All Crimes</div> <div class='all05'>2005</div>  <div class='all16 activeYear'>2016</div>
-    <div class='dem info'><select id="demSelect"><option selected disabled>Demographic</option></select></div> <div class='dem05'>2005</div>  <div class='dem16 activeYear'>2016</div>
+    <div class="crimeTitle"><span class="bolder">Los Angeles</span><br>Crime Spotter<br>2016</div>
+    <div class="info allcrimeInfo">Statistics <i class="fas fa-info-circle"></i></div>
+    <div class='info all16 activeYear'>All Crimes</div>
+    <div class="info narc16">Narcotics</div>
+    <div class="info burg16">Burglary</div>
+    <div class="info hom16">Homicide</div>
+    <div class="info dem16">Crimes & Demographics</div>
+    <div class='dem info'><select id="demSelect"><option selected disabled>Demographic</option></select></div>
   </div>
   <div id='infoBar' class='no-show'></div>
 		<div id="map"></div>
 
-    <div id="narcDialog" title="Narcotics Information">
-      <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+    <div id="allcrimeDialog" title="Crime Statistics">
+      <div id="titleHolder"><h3>All Crime Categories Over Time</h3></div>
+        <div id="menuHolder"></div>
+        <div id="bubbleHolder"></div>
+
+        <div id="titleHolder2"><h3>Individual Crime Categories Over Time</h3></div>
+        <div id="linebuttonHolder"></div>
+        <div id="lineHolder"></div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <form role="form" class="categories">
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="graph"></div>
+              </div>
+            </div>
+          </div>
     </div>
-
-    <div id="burgDialog" title="Burglary Information">
-  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-</div>
-
-<div id="homDialog" title="Homicide Information">
-  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-</div>
 
 		<!--scripts-->
 		<script src="js/jquery.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script>
-    $("#narcDialog").dialog({
-    	autoOpen: false
-    });
-    $("#burgDialog").dialog({
-    	autoOpen: false
-    });
-    $("#homDialog").dialog({
-    	autoOpen: false
+    $("#allcrimeDialog").dialog({
+    	autoOpen: false,
+      width: (window.innerWidth * .6), //changed
+      height: (window.innerHeight * .6) //changed
     });
     </script>
-    <script src="js/d3.js"></script>
+    <script src="js/d3.v4.min.js"></script>
     <script src="js/stats.js"></script>
     <script src="js/topo.js"></script>
     <script src="js/touchpunch.js"></script>
 		<script src="js/leaflet.js"></script>
     <script src="js/heat.js"></script>
 		<script src="js/main.js"></script>
+    <script src="js/graphs.js"></script>
 	</body>
 	</html>
