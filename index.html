@@ -11,6 +11,7 @@
 		<![endif]-->
 
 		<!--stylesheets-->
+
 <link rel="stylesheet" href="css/leaflet.css">
 <link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="stylesheet" href="css/style.css">
@@ -21,11 +22,16 @@
 
     <div id="bar">
     <div class="crimeTitle"><span class="bolder">Los Angeles</span><br>Crime Spotter<br>2016</div>
-    <div class="info allcrimeInfo">Statistics <i class="fas fa-info-circle"></i></div>
+    <div class='catTitle'>Graphs/Charts</div>
+    <div class="info allcrimeInfo">All Crime Over Time</div>
+    <div class="info catcrimeInfo">Individual Crime Over Time</div>
+    <div class="info regcrimeInfo">Crimes Per Region</div>
+      <div class='catTitle'>Layers</div>
     <div class='info all16 activeYear'>All Crimes</div>
     <div class="info narc16">Narcotics</div>
     <div class="info burg16">Burglary</div>
     <div class="info hom16">Homicide</div>
+    <div class="info police">Sheriff and Police Stations</div>
     <div class="info dem16">Crimes & Demographics</div>
     <div class='dem info'><select id="demSelect"><option selected disabled>Demographic</option></select></div>
   </div>
@@ -36,33 +42,49 @@
       <div id="titleHolder"><h3>All Crime Categories Over Time</h3></div>
         <div id="menuHolder"></div>
         <div id="bubbleHolder"></div>
+      </div>
 
+      <div id="catcrimeDialog" title="Crime Statistics">
         <div id="titleHolder2"><h3>Individual Crime Categories Over Time</h3></div>
         <div id="linebuttonHolder"></div>
         <div id="lineHolder"></div>
+      </div>
 
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <form role="form" class="categories">
-                    </form>
-                  </div>
+<div id="regcrimeDialog" title="Crime Statistics">
+        <div id="titleHolder2"><h3>Total Crimes and Demographic Statistics for per Region 2016</h3></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <form style="columns:3" role="form" class="categories">
+                  </form>
                 </div>
               </div>
-              <div class="col-md-8">
-                <div class="graph"></div>
-              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="graph"></div>
+              <svg id="imageSVG" viewBox="0 0 400 220"></svg>
             </div>
           </div>
-    </div>
+        </div>
+      </div>
 
 		<!--scripts-->
 		<script src="js/jquery.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script>
     $("#allcrimeDialog").dialog({
+    	autoOpen: false,
+      width: 700, //changed
+      height: 650 //changed
+    });
+    $("#catcrimeDialog").dialog({
+    	autoOpen: false,
+      width: 1000, //changed
+      height: 600 //changed
+    });
+    $("#regcrimeDialog").dialog({
     	autoOpen: false,
       width: (window.innerWidth * .6), //changed
       height: (window.innerHeight * .6) //changed

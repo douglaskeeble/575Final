@@ -18,7 +18,7 @@ html, body, #map {
 	 text-align: center;
 	 margin-top: 15px;
 	 margin-left: 15px;
-	 height: 300px;
+	 height: 420px;
 	 z-index: 10;
 	 position: absolute;
  }
@@ -29,13 +29,13 @@ html, body, #map {
 	background-color: #347B98;
 	border-radius: 15px;
 	text-align: center;
-	margin-top: 325px;
+	margin-top: 400px;
 	margin-left: 15px;
 	height: 20px;
 	padding-top: 8px;
 	padding-bottom: 5px;
-	color: white;
-	font-size: 90%;
+	color: #FAAD63;
+	font-size: 110%;
 	z-index: 10;
 	position: absolute;
  }
@@ -128,7 +128,7 @@ h3 {
 	margin-bottom: 5px;
 }
 
-.hom16, .burg16, .narc16, .all16, .dem16 {
+.hom16, .burg16, .narc16, .all16, .dem16, .police{
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 10px;
@@ -136,7 +136,7 @@ h3 {
 	display: inline-block;
 }
 
-.hom16:hover, .burg16:hover, .narc16:hover, .all16:hover, .dem16:hover {
+.hom16:hover, .burg16:hover, .narc16:hover, .all16:hover, .dem16:hover, .police:hover {
 	color: #B8C2CC;
 }
 
@@ -144,14 +144,21 @@ h3 {
 	color: #F6993F !important;
 }
 
-.allcrimeInfo{
+.catTitle{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #22292F;
+	font-variant: petite-caps;
+}
+
+.allcrimeInfo, .catcrimeInfo, .regcrimeInfo{
 	margin-left: 10px;
 	top: 1px;
 	position: relative;
-	margin-bottom: 25px;
+	margin-bottom: 5px;
 }
 
-.allcrimeInfo:hover {
+.allcrimeInfo:hover, .catcrimeInfo:hover, .regcrimeInfo:hover {
     color: #4DC0B5;
     cursor: pointer;
 }
@@ -172,19 +179,14 @@ h3 {
 
 .dem16Layer {
 	z-index: 1;
-	opacity: .6;
+	opacity: .3;
 }
 
 .leaflet-map-pane canvas {
-	z-index: 9999;
+	z-index: 10;
 }
 
 /* modal styling */
-
-#allcrimeDialog {
-    background-color: lightgray;
-}
-
 
 #titleHolder, #menuHolder, #linebuttonHolder {
     text-align: center;
@@ -193,12 +195,19 @@ h3 {
 }
 
 #titleHolder2{
-    margin-top: 100px;
+    margin-top: 10px;
     text-align: center;
 }
 
 
 /* line graph tool tips */
+
+.regionGraph {
+	background-image: url(img/regions.JPG);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: right;
+}
 
 .axis path, .axis line {
     fill: none;
@@ -208,7 +217,6 @@ h3 {
 
 .line {
     fill: none;
-
     stroke-width: 1.5px;
 }
 

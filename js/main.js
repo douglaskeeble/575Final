@@ -15,6 +15,22 @@ $(document).ready(function() {
 		}
 	})
 
+	$('.catcrimeInfo').click(function() {
+		if ($('#catcrimeDialog').dialog('isOpen')) {
+			$('#catcrimeDialog').dialog('close');
+		} else {
+			$('#catcrimeDialog').dialog('open');
+		}
+	})
+
+	$('.regcrimeInfo').click(function() {
+		if ($('#regcrimeDialog').dialog('isOpen')) {
+			$('#regcrimeDialog').dialog('close');
+		} else {
+			$('#regcrimeDialog').dialog('open');
+		}
+	})
+
 	var dropDownChoices = ['Total Population', 'White', 'Black',
 		'American Indian', 'Asian', 'Pacific Islander', 'Other',
 		'Two or More', "Mean Income", 'Less than HS',
@@ -57,6 +73,7 @@ $(document).ready(function() {
 	var heatBurg16 = [];
 	var heatHom16 = [];
 	var props = [];
+	var policeGroup = L.featureGroup();
 	var heatmapAll16 = L.heatLayer(),
 		heatmapBurg16 = L.heatLayer(),
 		heatmapHom16 = L.heatLayer(),
@@ -113,7 +130,14 @@ $(document).ready(function() {
 	zoomButtons();
 
 	createTopo();
+	createPolice();
 	jqueryInit();
+
+	function createPolice() {
+		d3.json("data/Sheriff_and_Police_Stations.json", function(data) {
+			police = L.geoJSON(data).addTo(policeGroup);
+		});
+	}
 
 	function createTopo() {
 		var csv;
@@ -180,8 +204,9 @@ $(document).ready(function() {
 			var selected = d3.selectAll(".ct" + properties.CT10)
 				.style("stroke", "red")
 				.style("stroke-width", "2");
-			$('#infoBar').html(props[props.indexOf(expressed)] + ' ' + properties[
-				expressed]);
+			$('#infoBar').html(dropDownChoices[props.indexOf(expressed)] + ': ' +
+				properties[
+					expressed]);
 			$('#infoBar').removeClass('no-show');
 		};
 
@@ -347,14 +372,21 @@ $(document).ready(function() {
 					map.removeLayer(element.heatmap);
 				} else {
 					$(this).toggleClass('activeYear');
-					map.eachLayer(function(layer) {
-						if (!(layer._url ==
-								'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-							) &&
-							!(layer.options.clickable == true)) {
-							map.removeLayer(layer);
+					// map.eachLayer(function(layer) {
+					// 	console.log(layer);
+					// 	if (!(layer._url ==
+					// 			'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+					// 		) &&
+					// 		!(layer.options.clickable == true) && !(layer._leaflet_id == 114)
+					// 	) {
+					// 		map.removeLayer(layer);
+					// 	}
+					// });
+					layerList.forEach(function(el2) {
+						if (map.hasLayer(el2.heatmap)) {
+							map.removeLayer(el2.heatmap);
 						}
-					});
+					})
 					element.heatmap.addTo(map);
 					classes.forEach(function(selector) {
 						if (!(selector == element.class)) {
@@ -364,6 +396,15 @@ $(document).ready(function() {
 				}
 			})
 		})
+
+		$('.police').click(function() {
+			if (map.hasLayer(policeGroup)) {
+				map.removeLayer(policeGroup)
+			} else {
+				map.addLayer(policeGroup)
+			}
+			$(this).toggleClass('activeYear');
+		});
 
 		$('.dem16').click(function() {
 			d3.selectAll("g.dem16Layer")

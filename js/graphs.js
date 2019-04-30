@@ -66,8 +66,8 @@ $(document).ready(function() {
 
     var svg = d3.select("#bubbleHolder").append("svg")
       .attr("class", "bubbleChart")
-      .attr("width", width)
-      .attr("height", height);
+      .attr("width", 650)
+      .attr("height", 450);
 
     // Define the div for the tooltip
     var div = d3.select("#bubbleHolder").append("div")
@@ -75,7 +75,7 @@ $(document).ready(function() {
       .style("opacity", 0);
 
     var pack = d3.pack()
-      .size([width - 150, height])
+      .size([500, 450])
       .padding(1.5);
 
 
@@ -141,8 +141,8 @@ $(document).ready(function() {
           });
 
           div.html(d.data.Crime + ": " + numberWithCommas(d.data.value))
-            .style("left", (d3.event.pageX - 250) + "px")
-            .style("top", (d3.event.pageY - 170) + "px")
+            .style("left", (d3.event.clientX - 500) + "px")
+            .style("top", (d3.event.clientY - 250) + "px")
             .style("font-family", "Avenir", "sans-serif");
         })
         .on("mouseout", function(d) {
@@ -181,7 +181,7 @@ $(document).ready(function() {
       .append("select")
       .attr("class", "dropdown")
       .on("change", function() {
-        updateLine(this.value, width, height)
+        updateLine(this.value, 300, 850)
       });
 
     //add initial option
@@ -386,58 +386,80 @@ $(document).ready(function() {
 
     var data = [{
         "area": "Antellope Valley",
-        "stats": [234872, 58748, 15939, 75517, 7776, 7205, 1542, 1969,
-          6436, 21
+        "stats": [234872, 58748, 2404, 15939, 778, 75517, 19717, 68877,
+          7776, 7205, 19097, 1542, 951, 117, 3511, 2022, 63, 341, 1385,
+          5, 1277, 21, 775, 1969, 4414, 412, 218, 6, 2001, 3178, 538
         ]
       }, {
         "area": "East",
-        "stats": [856195, 59773, 179520, 422500, 27218, 27509, 10028,
-          5112, 17558, 67
+        "stats": [856195, 59773, 9002, 179520, 4353, 422500, 46767, 69241,
+          27218, 27509, 84533, 10028, 1646, 129, 4878, 3918, 97, 747,
+          2851, 19, 5100, 67, 851, 5112, 13640, 901, 104, 122, 3842,
+          5850, 1056
         ]
       }, {
         "area": "Metro",
-        "stats": [692630, 69543, 223782, 342703, 23433, 71453, 19855,
-          1041, 2800, 7
+        "stats": [692360, 69543, 9397, 223782, 2103, 342703, 46240, 73063,
+          23433, 21453, 57619, 19855, 791, 20, 3821, 382, 148, 189, 558,
+          0, 504, 7, 265, 1041, 2418, 261, 304, 15, 968, 1130, 305
         ]
       }, {
         "area": "San Fernando",
-        "stats": [1519700, 85191, 260276, 332340, 28087, 34602, 24381,
-          1338, 5480, 7
+        "stats": [1519700, 85191, 9763, 260276, 3018, 332340, 92641,
+          94244, 28087, 34602, 108063, 24381, 861, 32, 2824, 1324, 151,
+          255, 1730, 0, 683, 7, 577, 1338, 4156, 297, 151, 20, 1212,
+          1844, 248
         ]
       }, {
         "area": "San Gabriel Valley",
-        "stats": [858743, 69522, 536292, 372796, 21073, 29109, 20903,
-          3092, 10258, 25
+        "stats": [858743, 69522, 11212, 536292, 4208, 372796, 68131,
+          86866, 21073, 29109, 100800, 20903, 842, 85, 2504, 3469, 73,
+          346, 2131, 0, 1961, 25, 679, 3092, 6789, 509, 127, 104, 1985,
+          3823, 401
         ]
       },
 
       {
         "area": "South",
-        "stats": [450301, 319302, 36972, 450731, 32145, 24587, 8414, 2958,
-          9398, 92
+        "stats": [450301, 319302, 8196, 36972, 2583, 450731, 28669, 50230,
+          32145, 24587, 74856, 8414, 848, 159, 4513, 1910, 60, 458,
+          1082, 13, 3549, 92, 476, 2958, 7488, 945, 95, 152, 2337, 3697,
+          996
         ]
       }, {
         "area": "South Bay",
-        "stats": [819567, 276700, 240154, 276432, 25022, 27350, 14769,
-          2805, 9004, 49
+        "stats": [819567, 276700, 14700, 240154, 12743, 276432, 99308,
+          80689, 25022, 27350, 82962, 14769, 787, 89, 2948, 1888, 123,
+          341, 1499, 1, 2273, 49, 416, 2805, 7116, 499, 59, 40, 1898,
+          3454, 715
         ]
       },
 
       {
         "area": "West",
-        "stats": [570986, 63157, 99725, 41237, 4622, 10221, 19233, 239,
-          2089, 4
+        "stats": [570986, 63157, 4559, 99725, 1340, 39910, 41237, 141391,
+          4622, 10221, 47785, 19233, 278, 11, 618, 477, 104, 99, 414, 0,
+          243, 4, 134, 239, 1612, 94, 20, 5, 391, 724, 42
         ]
       }
 
     ];
 
-    var ids = ['white', 'black', 'asian', 'other', 'lessHS', 'HSgrad',
-      'BAhigher', 'narcotics', 'BurgRob', 'homicide'
+    var ids = ['white', 'black', 'amerInd', 'asian', 'pacIsl', 'other',
+      'twoRac', 'income', 'lessHS', 'HSgrad', 'somColl', 'BAhigher',
+      'alcohol', 'arson', 'assault', 'burglary', 'feddOff', 'felonMisc',
+      'fraud', 'gamble', 'gta', 'homicide', 'mental', 'narcotic',
+      'robbery', 'sexOff', 'suicide', 'vagrancy', 'vandal', 'vehicBoat',
+      'weapon'
     ];
-    var demVar = ['White', 'Black', 'Asian', 'Other',
-      'Less than High School Degree', 'High School Degree',
-      'BA or Higher', 'Narcotics', 'Burglary/Robbery', 'Homicides'
+    var demVar = ['White', 'Black', 'American Indian', 'Asian',
+      'Pacific Islander', 'Other Race', 'Two or More Races',
+      'Avg. Mean Income', 'Less than HS Degree', 'High School Degree',
+      'Some College', 'BA or Higher', 'Alcohol Rel.', 'Arson', 'Assault',
+      'Burglaries', 'Federal Off.', 'Felon Misc.', 'Fraud', 'Gambling',
+      'Grand Theft Auto', 'Homicide', 'Mentally Ill', 'Narcotics',
+      'Robberies', 'Sex Offense', 'Suicide', 'Vagrancy', 'Vandalism',
+      'VehicBoat Laws', 'Weapon Laws'
     ];
 
     // Let's populate the categoeries checkboxes
@@ -446,6 +468,10 @@ $(document).ready(function() {
       .enter()
       .append('div')
       .attr('class', 'checkbox')
+      .attr("transform", function(d, i) {
+        return "translate(" + (i % 2 * 150 + 10) + "," + (Math.floor(i /
+          2) * 20 + 10) + ")"
+      })
       .append('label').html(function(id, index) {
         var checkbox = '<input id="' + id +
           '" type="checkbox" class="category">';
@@ -459,8 +485,8 @@ $(document).ready(function() {
         bottom: 30,
         left: 95
       },
-      width = 800 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      width = 1000 - margin.left - margin.right,
+      height = 800 - margin.top - margin.bottom;
 
     // the scale for the area value
     var x = d3.scaleLinear()
@@ -469,15 +495,21 @@ $(document).ready(function() {
     // the scale for each state
     var y0 = d3.scaleBand()
       .rangeRound([0, height], .2);
-    //.bandwidth([0, height], .1);
-    // the scale for each state age
+
+    // the scale for each region
     var y1 = d3.scaleBand();
 
     // just a simple scale of colors
     var color = d3.scaleOrdinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56",
-        "#d0743c", "#ff8c00", "#ca0020", "#f4a582", "#d5d5d5"
-      ]);
+      .range(['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99',
+        '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99',
+        '#b15928',
+        '#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462',
+        '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f',
+        '#737373', '#ae017e', '#00441b', '#ce1256', '#253494', '#800026',
+        '#35978f'
+      ])
+      // .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#ca0020","#f4a582","#d5d5d5"]);
 
     //
     var xAxis = d3.axisBottom()
@@ -490,6 +522,7 @@ $(document).ready(function() {
     var svg = d3.select(".graph").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      .attr('class', 'regionGraph')
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top +
         ")");
@@ -500,9 +533,9 @@ $(document).ready(function() {
       var ids = [];
       for (var i = 0; i < x._groups[0].length; i++) {
         ids = [...ids, x._groups[0][i].id]
-          //console.log(x._groups[0][i])
+        console.log(x._groups[0][i])
       }
-      //console.log('>>>>>>>>>>>>>>>>>>>>>>', ids)
+      //                console.log('>>>>>>>>>>>>>>>>>>>>>>', ids)
       updateGraph(ids);
     });
 
@@ -514,7 +547,7 @@ $(document).ready(function() {
       y0.domain(data.map(function(d) {
         return d.area;
       }));
-      // y1 domain is all the age names, we limit the range to from 0 to a y0 band
+      // y1 domain is all the region names, we limit the range to from 0 to a y0 band
       y1.domain(demVar).rangeRound([0, y0.bandwidth()]);
 
       svg.append("g")
@@ -547,17 +580,17 @@ $(document).ready(function() {
       });
 
 
-      // x domain is between 0 and the maximun value in any ages.value
+      // x domain is between 0 and the maximun value in any regions.value
       x.domain([0, d3.max(areasData, function(d) {
         return d3.max(d.attributes, function(d) {
           return d.value
         });
       })]);
-      // y0 domain is all the state names
+      // y0 domain is all the region names
       y0.domain(areasData.map(function(d) {
         return d.area;
       }));
-      // y1 domain is all the age names, we limit the range to from 0 to a y0 band
+      // y1 domain is all the region names, we limit the range to from 0 to a y0 band
       y1.domain(ids).rangeRound([0, y0.bandwidth()]);
 
       svg.selectAll('.axis.x').call(xAxis);
@@ -604,46 +637,35 @@ $(document).ready(function() {
 
       attribute.exit().transition().attr("width", 0).remove();
 
-      var legend = svg.selectAll(".legend")
+      svg.selectAll(".legend").remove();
+      var legend = svg.append("g")
+        .attr('class', 'legend')
+        .attr("font-size", 10)
+        // .attr("text-anchor", "end")
+        .selectAll("g")
         .data(areasData[0].attributes.map(function(attribute) {
           return attribute.name;
-        }));
-
-      legend.enter().append("g");
-      legend
-        .attr("class", "legend")
+        }))
+        .enter().append("g")
         .attr("transform", function(d, i) {
-          return "translate(0," + (200 + i * 20) + ")";
+          return "translate(-70," + (200 + i * 20) + ")";
         });
 
-      var legendColor = legend.selectAll('.legend-color').data(function(d) {
-        return [d];
-      });
-      legendColor.enter().append("rect");
-      legendColor
-        .attr('class', 'legend-color')
-        .attr("x", width - 18)
+      legend.append("rect")
+        .attr("x", width - 50)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", color);
 
-      var legendText = legend.selectAll('.legend-text').data(function(d) {
-        return [d];
-      });;
-
-      legendText.enter().append("text");
-      legendText
-        .attr('class', 'legend-text')
+      //append legend texts
+      legend.append("text")
         .attr("x", width - 24)
         .attr("y", 9)
         .attr("dy", ".35em")
-        .style("text-anchor", "end")
+        // .style("text-anchor", "end")
         .text(function(d) {
           return d;
         });
-
-      legend.exit().remove();
     }
-
   } //groupedBars close
 });
