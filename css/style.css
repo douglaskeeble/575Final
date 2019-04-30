@@ -140,6 +140,21 @@ h3 {
 	color: #B8C2CC;
 }
 
+.okayButton {
+	border-radius: 30px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-right: 200px;
+    background-color: #F6993F;
+    text-align: center;
+    margin-left: 200px;
+		color: #22292F;
+		cursor: pointer;
+}
+.okayButton:hover {
+	background-color: #FAAD63;
+}
+
 .activeYear {
 	color: #F6993F !important;
 }

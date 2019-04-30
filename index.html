@@ -70,10 +70,28 @@
         </div>
       </div>
 
+
+      <div id="openingDialog">
+      <h4>Explore The Spatial Distribution of Crimes and Demographics in L.A. County, CA</h4>
+      <p>This map was designed to allow you, the user, to explore where and how frequently different types of crimes occur in Los Angeles County, California, for the year 2016. There are several layers and tools designed to assist you in this process. You can zoom in and out of the map to explore areas in more detail by using the + and – buttons in the upper right corner, or by scrolling with your scroll wheel or track pad. You can also click and drag the map around, in order to move the focus ofthe map to a new area. </p>
+      <p>
+        Six layers are provided, which you can turn on and of by clicking on their titles (orange indicates the layer is active and displaying, while white indicates it is off). A heatmap showing the frequency of all crimes that occur throughout the county, as well as three supplemental heatmaps that focus on three crimes of particular interest, including narcotic, burglaries and homicides. Additionally, there is a layer identifying the location of police stations, and lastly, there is a layer that you can use to choose what variable displays, among a list of specific crime categories or specific demographics. When this layer displays, you can mouse over an area in order to get more detailed information.</p>
+        <p>There are also several charts that accompany this application, and display how the quantity of types of crimes has varied over time, from 2005 – 2016, as well as a chart directly comparing crimes to demographics spatially. These charts can beaccessed through the links above the layers titled Statistics (or whatever we chooseto name the 3 modal links).</p>
+        <p>Enjoy exploring</p>
+        <div class='okayButton'>Let's Go</div>
+</div>
 		<!--scripts-->
 		<script src="js/jquery.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script>
+    $("#openingDialog").dialog({
+      autoOpen: true,
+      width: 700, //changed
+      height: 600 //changed
+    });
+    $('.okayButton').click(function(){
+      $("#openingDialog").dialog('close');
+    })
     $("#allcrimeDialog").dialog({
     	autoOpen: false,
       width: 700, //changed
